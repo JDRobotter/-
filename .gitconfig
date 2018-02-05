@@ -7,7 +7,7 @@
   pager = less
 
 [alias]
-  la = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%Creset' --abbrev-commit
+  la = log --color --branches --remotes --graph --pretty=format:'%Cred%h%Creset:%C(yellow)%d%Creset %s %C(bold blue)%Creset' --abbrev-commit
   wdiff = diff --word-diff
   st = status -sbv -uno
 
