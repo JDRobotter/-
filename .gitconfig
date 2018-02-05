@@ -1,0 +1,29 @@
+[user]
+  email = jeandamien.brossillon@gmail.com
+  name = JD
+
+[core]
+  editor = vim
+  pager = less
+
+[alias]
+  la = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%Creset' --abbrev-commit
+  wdiff = diff --word-diff
+  st = status -sbv -uno
+
+
+[color]
+  ui = auto
+
+[diff]
+  mnemonicprefix = true
+
+[rererer]
+  enabled = true
+
+[rebase]
+  autosquash = true
+  autostash = true
+
+
+
