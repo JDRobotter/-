@@ -103,4 +103,6 @@ nnoremap <Space> :tab new<CR>
 nnoremap <C-Left> :tabp<CR>
 nnoremap <C-Right> :tabn<CR>
 
+set wildmode=list:longest
+
 colo smyck
