@@ -1,0 +1,9 @@
+[font]
+    size = 12.0
+[window]
+    decorations = "None"
+[keyboard]
+    bindings = [
+        # Ctrl+shift+N pop a new terminal
+        {mods="Control|Shift", key="N", action="CreateNewWindow"}
+    ]
