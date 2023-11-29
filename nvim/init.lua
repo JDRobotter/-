@@ -57,12 +57,23 @@ vim.o.softtabstop = 4
 vim.o.expandtab = true
 vim.o.shiftwidth = 4
 vim.bo.autoindent = true
+vim.opt.updatetime = 750
+
+-- set leader key
+vim.keymap.set('n', 'ù', '<Nop>');
+vim.g.mapleader = 'ù';
+vim.g.maplocalleader = 'ù';
 
 vim.keymap.set('n', '<F2>', '<Cmd>:split<CR>',{noremap = true})
 vim.keymap.set('n', '<F3>', '<Cmd>:vertical split<CR>',{noremap = true})
 vim.keymap.set('n', '<Space>', '<Cmd>:tab new<CR>',{noremap = true})
 vim.keymap.set('n', '<C-Left>', '<Cmd>:tabp<CR>',{noremap = true})
 vim.keymap.set('n', '<C-Right>', '<Cmd>:tabn<CR>',{noremap = true})
+vim.keymap.set('n', '<C-Up>', '<Cmd>:m .-2<CR>==',{noremap = true})
+vim.keymap.set('n', '<C-Down>', '<Cmd>:m .+1<CR>==',{noremap = true})
+vim.keymap.set('i', '<C-Up>', '<Cmd>:m .-2<CR>',{noremap = true})
+vim.keymap.set('i', '<C-Down>', '<Cmd>:m .+1<CR>',{noremap = true})
+
 
 vim.o.wildmode = "list:longest"
 
@@ -108,7 +119,7 @@ vim.api.nvim_create_autocmd({"CursorMoved"}, {
                     if bin == '' then
                         bin = hex2bin[c]
                     else
-                        bin = hex2bin[c] .. '_' .. bin
+                        bin = bin .. '_' .. hex2bin[c]
                     end
                 end
 
@@ -128,7 +139,11 @@ require('lualine').setup({
     options = {
         theme = 'gruvbox',
     },
+    inactive_sections = {
+        lualine_c = { "%{expand('%:p:h:t')}/%t" },
+    },
     sections = {
+        lualine_c = { "%{expand('%:p:h:t')}/%t" },
         lualine_x = { 'g:my_hex_infos' },
     },
 })
@@ -144,7 +159,7 @@ rt.setup({
     server = {
         on_attach = function(_, bufnr)
             -- Hover actions
-            vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+            vim.keymap.set("n", "<Leader>z", rt.hover_actions.hover_actions, { buffer = bufnr })
             -- Code action groups
             vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
         end,
@@ -196,8 +211,10 @@ vim.keymap.set("n", "<C-p>", my_git_files, {})
 function my_find_files()
     return require('telescope.builtin').find_files({cwd="~"})
 end
-vim.keymap.set("n", "<C-o>", my_find_files, {})
+-- XXX C-o conflict with go back in jump list
+--vim.keymap.set("n", "<C-o>", my_find_files, {})
 
+vim.keymap.set("n", "<C-l>", require('telescope.builtin').diagnostics, {})
 
 -- fidget
 require('fidget').setup({})
